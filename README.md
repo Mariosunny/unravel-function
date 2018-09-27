@@ -80,3 +80,6 @@ createStudent = unravel(foo);
 // name, major are passed in as undefined
 var result = createStudent.age(23).eval();
 ```
+
+## About
+This project is solely maintained by [Tyler Hurson](https://github.com/Mariosunny). Submit any issues or pull requests to the [official Github repo](https://github.com/Mariosunny/unravel-function).
