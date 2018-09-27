@@ -1,0 +1,22 @@
+{
+  "name": "unravel-function",
+  "version": "1.0.0",
+  "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated.",
+  "main": "lib/unravel.js",
+  "scripts": {
+    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "test": "jest"
+  },
+  "author": "Tyler Hurson",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.6.0"
+  },
+  "babel": {
+    "presets": ["es2015"]
+  }
+}
