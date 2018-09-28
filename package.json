@@ -1,6 +1,6 @@
 {
   "name": "unravel-function",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated.",
   "main": "lib/unravel.js",
   "scripts": {
@@ -35,6 +35,8 @@
     "jest": "^23.6.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
 }
