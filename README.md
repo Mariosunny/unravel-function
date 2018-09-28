@@ -12,7 +12,7 @@ func = unravel(func);
 var result = func
   .foo(5)
   .qux(8)
-  .bar(3); // arguments can be chained in any order
+  .bar(3);
 
 console.log(result); // prints 10 (5 - 3 + 8)
 ```
@@ -38,48 +38,56 @@ Returns an object where each parameter name of `func` is mapped to a function th
 
 #### Overriding parameter names
 ```javascript
-const unravel = require('unravel-function');
-
 function foo(bar, baz, bux) {
   ...
 }
 
-let fooWith = unravel(foo, ['bezos', null, 'waldo']);
+// 'bezos' is mapped to the first argument, 'waldo' is mapped to the third argument
+let chain = unravel(foo, ['bezos', null, 'waldo']);
 
-var result = fooWith
-  .bezos(1) // maps to 'bar' parameter
-  .baz(2)
-  .waldo(3); // maps to 'bux' parameter
+// same as foo(1, 2, 3)
+var result = chain.bezos(1).baz(2).waldo(3);
 ```
 
-#### Grouping arguments
-```javascript
-const unravel = require('unravel-function');
-
-function employeeStats(firstName, lastName, ssn) {
+#### Additional parameter names
+```
+function foo(bar, baz, bux) {
   ...
 }
 
-// groups the first and second parameters into a single function 'fullName' in the chain
-employeeStats = unravel(employeeStats, ['fullName', 'fullName', null] );
+// 'qux' is mapped to the fourth argument
+let chain = unravel(foo, [null, null, null, 'qux']);
 
-let result = employeeStats.fullName("Henry", "Harper").ssn("000-00-0000");
+// same as foo(1, 2, 3, 4)
+var result = chain.bar(1).baz(2).bux(3).qux(4);
 ```
 
-#### Optional arguments
+#### Short-circuit evaluation
 ```javascript
-const unravel = require('unravel-function');
-
-function createStudent(name, age, major) {
+function foo(bar, baz, bux) {
   ...
 }
 
-createStudent = unravel(foo);
+foo = unravel(foo);
 
-// immediately evaluates the function with the current arguments
-// name, major are passed in as undefined
-var result = createStudent.age(23).eval();
+// same as foo(undefined, 5, undefined)
+var result = foo.baz(5).eval();
 ```
+
+## Note on ES6 Default Parameters
+If you are working on an ES6 project that compiles into ES5 code using [Babel](https://www.npmjs.com/package/@babel/cli), `unravel-function` will be unable to automatically detect [ES6 default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) in your compiled code. This is due to the way that ES6 implements default parameters. If you wish to unravel a function with ES6 default parameters, you will have to explicitly pass in the name of each parameter when calling `unravel`.
+
+```javascript
+const unravel = require('unravel-function');
+
+// function with ES6 optional parameters
+function foo(a, b, c = 5) {
+    ...
+}
+
+foo = unravel(foo, ['a', 'b', 'c']);
+```
+
 
 ## About
-This project is solely maintained by [Tyler Hurson](https://github.com/Mariosunny). Submit any issues or pull requests to the [official Github repo](https://github.com/Mariosunny/unravel-function).
+This project is maintained by [Tyler Hurson](https://github.com/Mariosunny). Submit any issues or pull requests to the [official Github repo](https://github.com/Mariosunny/unravel-function).

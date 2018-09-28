@@ -1,12 +1,12 @@
-// Credit: https://stackoverflow.com/a/31194949/2301287
 export function getParameters(func) {
-    return (func + '')
-        .replace(/[/][/].*$/mg,'')
-        .replace(/\s+/g, '')
-        .replace(/[/][*][^/*]*[*][/]/g, '')
-        .split('){', 1)[0].replace(/^[^(]*[(]/, '')
-        .replace(/=[^,]+/g, '')
-        .split(',').filter(Boolean);
+    let stripped = (func + '')
+        .replace(/=[^,]+/mg, '')
+        .replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg, '')
+        .replace(/=>.*$/mg, '');
+
+    let result = stripped.slice(stripped.indexOf('(') + 1, stripped.indexOf(')')).match(/([^\s,]+)/g);
+
+    return result === null ? []: result;
 }
 
 export function fillArray(size, value) {

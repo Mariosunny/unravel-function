@@ -19,7 +19,7 @@ const UNFILLED_ARG = Symbol();
  * @author Tyler Hurson
  * @param {function} func The function to be evaluated at the end of the chain or when eval() is called
  * @param {string[]=} [params=[]] A list of parameter names that override the parameter names of the function in the chain
- * @returns {Object} The unraveled function chain
+ * @returns {Object} The unraveled function chain, or the origin function if the function has no parameters
  */
 export default function unravel(func, params) {
     let funcParameters = getParameters(func);
@@ -28,12 +28,18 @@ export default function unravel(func, params) {
     validateFunc(func);
     validateParams(overrideParams);
 
+    if(funcParameters.length === 0) {
+        return func;
+    }
+
+    let numberOfArgs = Math.max(funcParameters.length, overrideParams.length);
+
     return unravelRecursive(
         func,
         funcParameters,
         overrideParams,
-        fillArray(funcParameters.length, UNFILLED_ARG),
-        funcParameters.length
+        fillArray(numberOfArgs, UNFILLED_ARG),
+        numberOfArgs
     );
 }
 
