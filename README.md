@@ -50,7 +50,7 @@ var result = chain.bezos(1).baz(2).waldo(3);
 ```
 
 #### Additional parameter names
-```
+```javascript
 function foo(bar, baz, bux) {
   ...
 }
