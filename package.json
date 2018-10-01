@@ -1,7 +1,7 @@
 {
   "name": "unravel-function",
   "version": "0.0.1",
-  "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated.",
+  "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, al la the Builder Pattern.",
   "main": "lib/unravel.js",
   "scripts": {
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
@@ -16,17 +16,28 @@
   "dependencies": {},
   "keywords": [
     "function",
+    "functional",
+    "functional programming",
     "parameter",
     "argument",
     "builder",
+    "builder pattern",
+    "design pattern",
+    "design patterns",
+    "patterns",
+    "pattern",
+    "design",
+    "readability",
+    "readable",
     "chain",
     "chaining",
     "unravel",
-    "unwrap"
+    "explode",
+    "unwrap",
+    "unpack"
   ],
   "files": [
-    "lib/unravel.js",
-    "lib/util.js"
+    "lib/unravel.js"
   ],
   "devDependencies": {
     "babel-cli": "^6.26.0",

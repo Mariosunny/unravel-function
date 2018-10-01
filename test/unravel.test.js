@@ -80,31 +80,6 @@ test('ensure order of args does not matter', () => {
     expect(fooWith.c(2).a(10).b(5)).toBe(7);
 });
 
-test('test structure of chain object', () => {
-    testChainObjectStructure(unravel(foo), [3, 2, 1], ['a', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo), [3, 1, 2], ['a', 'c', 'b'], 'number', 2);
-    testChainObjectStructure(unravel(foo), [2, 3, 1], ['b', 'a', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo), [2, 1, 3], ['b', 'c', 'a'], 'number', 2);
-    testChainObjectStructure(unravel(foo), [1, 3, 2], ['c', 'a', 'b'], 'number', 2);
-    testChainObjectStructure(unravel(foo), [1, 2, 3], ['c', 'b', 'a'], 'number', 2);
-});
-
-test('test structure of chain object with overridden parameters', () => {
-    testChainObjectStructure(unravel(foo, []), [3, 2, 1], ['a', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, ['d']), [3, 2, 1], ['d', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, ['d', 'e']), [3, 2, 1], ['d', 'e', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, ['d', 'e', 'f']), [3, 2, 1], ['d', 'e', 'f'], 'number', 2);
-    testChainObjectStructure(unravel(foo, ['d', null]), [3, 2, 1], ['d', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, ['d', null, null]), [3, 2, 1], ['d', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, 'e']), [3, 2, 1], ['a', 'e', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, 'e', null]), [3, 2, 1], ['a', 'e', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, null, 'f']), [3, 2, 1], ['a', 'b', 'f'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, 'f']), [3, 2, 1], ['a', 'f', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, null, null]), [3, 2, 1], ['a', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null, null]), [3, 2, 1], ['a', 'b', 'c'], 'number', 2);
-    testChainObjectStructure(unravel(foo, [null]), [3, 2, 1], ['a', 'b', 'c'], 'number', 2);
-});
-
 test('test short-circuit evaluation', () => {
     let fooWith = unravel(foo);
 
@@ -169,22 +144,4 @@ function bar(a, b) {
     b = b || 8;
     let c = arguments[2] || 5;
     return a - b + c;
-}
-
-function testChainObjectStructure(chainObject, args, params, resultType, result) {
-    params.forEach(function(param, paramIndex) {
-        chainObject = chainObject[param](args[paramIndex]);
-
-        if(paramIndex < params.length - 1) {
-            expect(Object.keys(chainObject).length).toBe(params.length - paramIndex);
-            expect(typeof chainObject.eval).toBe('function');
-
-            for(let i = paramIndex; i < param.size; i++) {
-                expect(typeof chainObject[params[i]]).toBe('function');
-            }
-        }
-    });
-
-    expect(typeof chainObject).toBe(resultType);
-    expect(chainObject).toBe(result);
 }

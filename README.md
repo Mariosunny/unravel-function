@@ -1,5 +1,5 @@
 ## unravel-function
-Takes a function and spreads its arguments across a chain of functions to be lazily evaluated.
+Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, al la the [Builder Pattern](https://sourcemaking.com/design_patterns/builder).
 ```javascript
 const unravel = require('unravel-function');
 
@@ -23,15 +23,19 @@ console.log(result); // prints 10 (5 - 3 + 8)
 $ npm install unravel-function --save
 ```
 
+## Why Use It?
+- It makes your function calls more readable- especially useful for functions with lots of arguments.
+- It's lightweight. The unminified source code is less than 2 KB.
+
 ## Description
 `unravel(func, params=undefined)`
 
-Returns an object where each parameter name of `func` is mapped to a function that expects a single argument and then returns another object, and so on until all arguments of `func` have been filled. On the last call in the chain, `func` is evaluated with the provided arguments and returned. `eval()` can be called at any point in the chain, and will evaluate `func` with the current arguments, with any remaining arguments set to _undefined_.
+Returns an object whose keys are the parameter names of `func` (unless overriden by `params`), and whose values are functions that take a single argument that fills the corresponding parameter. Once the last argument is filled (or when `eval()` is called), `func` is evaluated with the arguments and the result is returned.
 
 #### Parameters
 | Name | Type          | Default Value | Description                                         |
 |-----------|---------------|---------------|-----------------------------------------------------|
-| `func`      | Function      |               | The function to be called at the end of the chain, or when `eval()` is called.|
+| `func`      | Function      |               | The function to be called after the last argument has been filled, or when `eval()` is called.|
 | `params`    | Array[String] | null          | _[Optional]_ An array of strings to override `func` parameter names. (See examples below)          |
 
 ## Examples
@@ -43,7 +47,7 @@ function foo(bar, baz, bux) {
 }
 
 // 'bezos' is mapped to the first argument, 'waldo' is mapped to the third argument
-let chain = unravel(foo, ['bezos', null, 'waldo']);
+var chain = unravel(foo, ['bezos', null, 'waldo']);
 
 // same as foo(1, 2, 3)
 var result = chain.bezos(1).baz(2).waldo(3);
@@ -56,7 +60,7 @@ function foo(bar, baz, bux) {
 }
 
 // 'qux' is mapped to the fourth argument
-let chain = unravel(foo, [null, null, null, 'qux']);
+var chain = unravel(foo, [null, null, null, 'qux']);
 
 // same as foo(1, 2, 3, 4)
 var result = chain.bar(1).baz(2).bux(3).qux(4);
@@ -80,7 +84,7 @@ If you are working on an ES6 project that compiles into ES5 code using [Babel](h
 ```javascript
 const unravel = require('unravel-function');
 
-// function with ES6 optional parameters
+// function with ES6 default parameters
 function foo(a, b, c = 5) {
     ...
 }
