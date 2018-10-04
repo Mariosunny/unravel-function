@@ -1,5 +1,5 @@
 ## unravel-function
-Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, al la the [Builder Pattern](https://sourcemaking.com/design_patterns/builder).
+Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, a la the [Builder Pattern](https://sourcemaking.com/design_patterns/builder).
 ```javascript
 const unravel = require('unravel-function');
 

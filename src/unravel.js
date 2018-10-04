@@ -1,6 +1,6 @@
 const UNFILLED_ARG = Symbol();
 
-export default function unravel(func, params) {
+module.exports = function unravel(func, params) {
     let funcParameters = getParameters(func);
     params = params || [];
 
@@ -50,7 +50,7 @@ export default function unravel(func, params) {
     };
 
     return chain;
-}
+};
 
 function getUnfilledArgs(length) {
     return Array.apply(null, Array(length)).map(function() { return UNFILLED_ARG; } );
