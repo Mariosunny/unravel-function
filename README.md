@@ -79,7 +79,7 @@ var result = foo.baz(5).eval();
 ```
 
 ## Note on ES6 Default Parameters
-If you are working on an ES6 project that compiles into ES5 code using [Babel](https://www.npmjs.com/package/@babel/cli), `unravel-function` will be unable to automatically detect [ES6 default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) in your compiled code. This is due to the way that ES6 implements default parameters. If you wish to unravel a function with ES6 default parameters, you will have to explicitly pass in the name of each parameter when calling `unravel`.
+If you are working on an ES6 project that compiles into ES5 code using [Babel](https://www.npmjs.com/package/@babel/cli), `unravel-function` will be unable to automatically detect [ES6 default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) in your compiled code. This is due to the way that ES6 implements default parameters. To unravel a function with ES6 default parameters, you will have to explicitly pass in the name of each parameter when calling `unravel`.
 
 ```javascript
 const unravel = require('unravel-function');

@@ -1,7 +1,7 @@
 {
   "name": "unravel-function",
   "version": "0.1.2",
-  "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, al la the Builder Pattern.",
+  "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, a la the Builder Pattern.",
   "main": "lib/unravel.js",
   "scripts": {
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
