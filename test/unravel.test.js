@@ -1,4 +1,4 @@
-import unravel from '../src/unravel';
+import unravel from '../dist/unravel.min';
 
 test('test validation', () => {
     expect(function() {

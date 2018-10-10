@@ -2,10 +2,11 @@
   "name": "unravel-function",
   "version": "0.1.3",
   "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, a la the Builder Pattern.",
-  "main": "lib/unravel.js",
+  "main": "dist/unravel.min.js",
   "scripts": {
-    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "test": "jest"
+    "prepublish": "npm run test",
+    "build": "node_modules/babel-cli/bin/babel.js src --out-dir dist && uglifyjs dist/unravel.js -c -m toplevel -o dist/unravel.min.js",
+    "test": "npm run build && jest"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,7 @@
     "unpack"
   ],
   "files": [
-    "lib/unravel.js"
+    "dist/unravel.min.js"
   ],
   "devDependencies": {
     "babel-cli": "^6.26.0",

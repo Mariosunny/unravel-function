@@ -25,7 +25,7 @@ $ npm install unravel-function --save
 
 ## Why Use It?
 - It makes your function calls more readable- especially useful for functions with lots of arguments.
-- It's lightweight. The unminified source code is less than 2 KB.
+- It's lightweight. The source code is less than 850 bytes in size.
 
 ## Description
 `unravel(func, params=undefined)`
