@@ -1,6 +1,6 @@
 {
   "name": "unravel-function",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, a la the Builder Pattern.",
   "main": "dist/unravel.min.js",
   "scripts": {
