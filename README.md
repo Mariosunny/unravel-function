@@ -1,4 +1,5 @@
-## unravel-function
+[![Build Status](https://travis-ci.org/Mariosunny/unravel-function.svg?branch=master)](https://travis-ci.org/Mariosunny/unravel-function.svg?branch=master)
+# unravel-function
 Takes a function and spreads its arguments across a chain of functions to be lazily evaluated, a la the [Builder Pattern](https://sourcemaking.com/design_patterns/builder).
 ```javascript
 const unravel = require('unravel-function');
@@ -94,4 +95,8 @@ foo = unravel(foo, ['a', 'b', 'c']);
 
 
 ## About
-This project is maintained by [Tyler Hurson](https://github.com/Mariosunny). Submit any issues or pull requests to the [official Github repo](https://github.com/Mariosunny/unravel-function).
+This project is maintained by [Tyler Hurson](https://github.com/Mariosunny). 
+Submit any issues or pull requests to the [official Github repo](https://github.com/Mariosunny/unravel-function).
+
+Check out other projects by this author:
+- [**validate-declarative**](https://www.npmjs.com/package/validate-declarative) - A simple utility for declaratively validating any Javascript object.
